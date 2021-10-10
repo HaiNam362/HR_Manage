@@ -9,7 +9,6 @@ const sequelizeDB = require('../config/database')
 
 // register
 exports.register = async (req, res, next) => {
-
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     const t = await sequelizeDB.transaction();

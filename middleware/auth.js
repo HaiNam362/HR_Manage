@@ -40,7 +40,6 @@ const decentralization = (roleArr) => {
                 }
             }
             res.status(404).send('unthozization');
-            
         
         } catch (err) {
             console.error(err);
