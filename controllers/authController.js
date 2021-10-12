@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     const t = await sequelizeDB.transaction();
-    const { username, password, age, email, phone, address, isActive, identityNumber, socialInsurance,avatar, isDelete } = req.body;
+    const { username, password, age, email, phone, address, isActive, identityNumber, socialInsurance, isDelete } = req.body;
     const { lastName, fullName, userId, managerId, isDeleted } = req.body.Employee;
     const { isDeleteD } = req.body.userRoleModels;
     try {
@@ -28,7 +28,6 @@ exports.register = async (req, res, next) => {
             socialInsurance: socialInsurance,
             createBy:username,
             updateBy:username,
-            avatar: avatar,
             isDeleted: isDelete,
         }, { transaction: t });
         await Employee.create({

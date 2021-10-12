@@ -40,7 +40,7 @@ exports.updateUser = async (req, res, next) => {
         res.status(404).send({ message: "not found" })
     }
     try {
-        const { username, password, age, email, phone, address, isActive, identityNumber, socialInsurance, avatar, isDeleted } = req.body;
+        const {  password, age, email, phone, address, isActive, identityNumber, socialInsurance, avatar, isDeleted } = req.body;
         userDB.set({ username: username, password: hashedPassword, age: age, email: email, phone: phone, address: address, isActive: isActive, identityNumber: identityNumber, socialInsurance: socialInsurance, avatar: avatar, isDeleted: isDeleted })
         const users = await userDB.save(userDB);
         data.user = users;

@@ -28,7 +28,7 @@ exports.createForm = async (req, res, next) => {
     }
     try {
         const form = await Form.create({
-            UserId: UserId.id,
+            UserId: UserId,
             receiver: receiver,
             type: type,
             status: status,
@@ -150,7 +150,7 @@ exports.PutStatusForm = async (req, res, next) => {
 exports.HRGetStatus = async (req, res, next) => {
     try {
         let form = await Form.findAll({
-            where: { complete: 1 },
+            where: { complete: 1, status: 'submitted' },
             include: FormDetail
         });
         res.status(200).json({
@@ -184,8 +184,9 @@ exports.HRPutStatusForm = async (req, res, next) => {
 }
 exports.checkDueDate = async (req, res, next) => {
     try {
-        let data = {};
+        let data = [];
         let form = await Form.findAll({
+            where: {status: 'close',complete:1},
             include: FormDetail
         });
         for (let a of form) {
