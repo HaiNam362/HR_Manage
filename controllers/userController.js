@@ -1,14 +1,34 @@
 const userModels = require('../models/user.models');
 const loggers = require('../utils/logger');
 const bcrypt = require('bcryptjs');
-
+const multer = require('multer');
 
 // get employee
 exports.getList = async (req, res, next) => {
-    
+
 }
 
-
+exports.uploadAvatar = async (req, res, next) => {
+    try {
+        console.log(req.file);
+        const userId = req.params.id;
+        const userDB = await userModels.findOne({where: {id: userId} })
+        console.log(userId);
+        if (!userDB) {
+            res.status(404).send({ message: "not found" })
+        }
+        console.log(userDB);
+         await userDB.update({
+            avatar: req.file.filename
+        })
+        res.status(200).json({
+            status: 'upload avatar success',
+            data: userDB
+        })
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 exports.updateUser = async (req, res, next) => {
     const id = req.params.id;
@@ -25,7 +45,7 @@ exports.updateUser = async (req, res, next) => {
         const users = await userDB.save(userDB);
         data.user = users;
         return res.status(200).send({ message: "update successfully", data: data });
-        
+
     } catch (error) {
 
         loggers.error(new Error(error));

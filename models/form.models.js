@@ -42,6 +42,12 @@ const Form = sequelizeDB.define('Form', {
     updatedAt: {
         type: DataTypes.DATE
     },
+    complete:{
+        type: DataTypes.INTEGER,
+    },
+    reject:{
+        type: DataTypes.INTEGER,
+    }
 })
 Form.hasOne(FormDetail);
 FormDetail.belongsTo(Form);

@@ -12,7 +12,7 @@ exports.register = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     const t = await sequelizeDB.transaction();
-    const { username, password, age, email, phone, address, isActive, identityNumber, socialInsurance, avatar, isDelete } = req.body;
+    const { username, password, age, email, phone, address, isActive, identityNumber, socialInsurance,avatar, isDelete } = req.body;
     const { lastName, fullName, userId, managerId, isDeleted } = req.body.Employee;
     const { isDeleteD } = req.body.userRoleModels;
     try {
@@ -50,27 +50,6 @@ exports.register = async (req, res, next) => {
         await t.rollback();
         console.log(err);
     }
-
-    // const salt = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    // let data = {};
-    // const t = await sequelizeDB.transaction();
-    // try {
-    //     const { username, password, age, email, phone, address, isActive, identityNumber, socialInsurance, avatar, isDeleted } = req.body;
-    //     const user = await userModels.create({ username: username, password: hashedPassword, age: age, email: email, phone: phone, address: address, isActive: isActive, identityNumber: identityNumber, socialInsurance: socialInsurance, avatar: avatar, isDeleted: isDeleted });
-    //     const token = jwt.sign({ user }, 'project', { algorithm: 'HS256' });
-    //     data.user = user;
-
-    //     
-    //     
-    //     res.status(200).json({
-    //         status: 'success',
-    //         data: { data, access_token: token }
-    //     })
-    // } catch (error) {
-    //     loggers.error(new Error(error));
-
-    // }
 }
 
 // login
@@ -92,9 +71,7 @@ exports.login = async (req, res, next) => {
                     status: ' login successfully',
                     user: user,
                     accessToken: token,
-                    
                 })
-                
             } else {
                 res.status(400).json({
                     status: false,

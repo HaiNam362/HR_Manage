@@ -39,11 +39,10 @@ const decentralization = (roleArr) => {
                     return next();
                 }
             }
-            res.status(404).send('unthozization');
+            res.status(404).send('unAuthorize');
         
         } catch (err) {
             console.error(err);
-
         }
     }
 }

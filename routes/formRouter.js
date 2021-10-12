@@ -5,10 +5,15 @@ const {decentralization} = require('../middleware/auth');
 const {verifyToken} = require('../middleware/auth');
 
 Router.use(verifyToken);
-Router.post('/create',decentralization([1,2,3,4]),formController.createForm);
-Router.put('/update/:id',decentralization([1,2,3,4,5]),formController.updateForm);
-// Router.post('/submit',formController.submitForm);
-// Router.patch('/approve ',formController.approveForm);
-// Router.patch('/close',formController.closeForm);
+
+Router.post('/create',decentralization([1,2,3]),formController.createForm);
+Router.put('/update/:id',decentralization([1,5]),formController.updateForm);
+Router.get('/user',decentralization([1,5]),formController.getUserForm);
+Router.get('/HR',decentralization([3]),formController.HRGetStatus);
+Router.patch('/HR/:id',decentralization([3]),formController.PutStatusForm);
+Router.get('/checkDueDate',decentralization([3]),formController.checkDueDate);
+// manage
+Router.get('/manager',decentralization([4]),formController.getStatusForm);
+Router.patch('/manager/:id',decentralization([4]),formController.PutStatusForm);
 module.exports = Router;
 
