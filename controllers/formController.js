@@ -2,7 +2,41 @@ const FormDetail = require('../models/formDetail.models')
 const Form = require('../models/form.models')
 const sequelizeDB = require('../config/database')
 const userModels = require('../models/user.models');
+const nodemailer = require("nodemailer");
 
+
+exports.sendEmail = (req, res) => {
+    console.log('có ra không');
+    var transporter = nodemailer.createTransport({ // config mail server
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'namnh1@vmodev.com', //Tài khoản gmail vừa tạo
+            pass: 'besxvcjrqeuynxmo' //Mật khẩu tài khoản gmail vừa tạo
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+    var mainOptions = {
+        from: 'NQH-Test nodemailer',
+        to: req.body.mail,
+        subject: 'Test Nodemailer',
+        text: 'xin chào bạn',
+        html: "<h1>Hello Dude abc </h1>"
+    }
+    transporter.sendMail(mainOptions, function (err, info) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Message sent: ' + info.response);
+            res.send({
+                message: 'email successfully', data: req.locals.data
+            })
+        }
+    });
+}
 exports.createForm = async (req, res, next) => {
     const UserId = req.body.userId;
     const receiver = req.body.receiver;
@@ -86,7 +120,6 @@ exports.updateForm = async (req, res, next) => {
         await t.commit();
         res.status(200).send('update form success');
         console.log("abc");
-
     } catch (error) {
         await t.rollback();
     }
@@ -141,7 +174,7 @@ exports.PutStatusForm = async (req, res, next) => {
             updateAt: Date.now(),
         }, { where: { FormId: formData.id }, transaction: t })
         await t.commit();
-        res.status(200).send('update success');
+        res.status(200).send('manage update success');
     } catch (err) {
         console.log(err);
     }
@@ -186,7 +219,7 @@ exports.checkDueDate = async (req, res, next) => {
     try {
         let data = [];
         let form = await Form.findAll({
-            where: {status: 'close',complete:1},
+            where: { status: 'close', complete: 1 },
             include: FormDetail
         });
         for (let a of form) {
@@ -199,6 +232,48 @@ exports.checkDueDate = async (req, res, next) => {
             result: data.length,
             data: data
         });
+    } catch (err) {
+        console.log(err);
+    }
+}
+// get form thử việc 
+exports.getFormTrail_work = async (req, res, next) => {
+    try {
+        let form = await Form.findAll({
+            where: { type: 0, status: 'close' }
+        });
+        let data = [];
+        for (const a of form) {
+            if ((Date.parse(a.dueDate) - Date.now()) > 0) {
+                data.push(a);
+            }
+        };
+        res.status(200).json({
+            status: 'success',
+            result: form.length,
+            data: form,
+        })
+    } catch (err) {
+        console.log(err);
+    }
+}
+// get form danh gia
+exports.getForm_APPRAISE = async (req, res, next) => {
+    try {
+        let form = await Form.findAll({
+            where: { type: 1, status: 'close' }
+        });
+        let data = [];
+        for (const a of form) {
+            if ((Date.parse(a.dueDate) - Date.now()) > 0) {
+                data.push(a);
+            }
+        };
+        res.status(200).json({
+            status: 'success',
+            result: form.length,
+            data: form,
+        })
     } catch (err) {
         console.log(err);
     }

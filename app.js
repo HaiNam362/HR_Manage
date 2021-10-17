@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const {errorHandler} = require('./middleware/errorHandler');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,6 +29,18 @@ app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/form', formRouter);
 
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info:{
+    title:'express api for JSONPlacehoder',
+    version: '1.0.0',
+  },
+}
+const option = {
+  swaggerDefinition,
+  apis:['./routes/*.js'],
+}
+const swaggerSpec = swaggerJsDoc(option);
 
 
 // catch 404 and forward to error handler
