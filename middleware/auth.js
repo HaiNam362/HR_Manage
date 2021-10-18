@@ -8,10 +8,12 @@ const { response } = require("express");
 const { parse } = require("uuid");
 
 const verifyToken = async (req, res, next) => {
-    const token = req.body.token || req.params.token || req.headers["x-access-token"];
-    if (!token) {
+    const Bearer = req.body.token || req.params.token || req.header("Authorization");
+    
+    if (!Bearer) {
         return res.status(403).send("A token is required for authentication");
     }
+    let token = Bearer.split(" ")[1];
     try {
         const decoded = await jwt.verify(token, 'project', { algorithm: 'HS256' });
         const user_abc = await User.findOne({ where: { username: decoded.username } });

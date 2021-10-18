@@ -45,6 +45,7 @@ exports.register = async (req, res, next) => {
         },{transaction: t})
         await user.addRole(role,{transaction: t});
         await t.commit();
+        res.status(200).send({ message:' register success'})
     } catch (err) {
         await t.rollback();
         console.log(err);
