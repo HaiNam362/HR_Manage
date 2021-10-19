@@ -7,11 +7,6 @@ const Form = require('../models/form.models')
 const Employee = require('../models/employee.models.js')
 const Api = require('../models/api.models')
 
-
-   
-    
-    
-    
     User.hasMany(Employee);
     Employee.belongsTo(User);
     
