@@ -25,7 +25,7 @@ The following is important:
 + dialect: 'mysql'
 
 # PROJECT STRUCTURE:
-
+```
 PROJECT3
 |--bin
 | |--www
@@ -102,3 +102,4 @@ PROJECT3
 |--package.json  
 |
 |--README.md
+```
