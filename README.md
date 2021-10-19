@@ -8,11 +8,12 @@
 4.  npm i
 
 # Operations:
-
+```
 npm start
 npm run test_auth
 npm run test_user
 npm run test_form
+```
 
 # Configuration
 
