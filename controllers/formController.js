@@ -84,6 +84,7 @@ exports.createForm = async (req, res, next) => {
         await t.commit();
         res.status(200).send('create form success');
         console.log("abc");
+        next();
     } catch (error) {
         await t.rollback();
     }

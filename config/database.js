@@ -1,9 +1,5 @@
 const { Sequelize } = require('sequelize');
 
-
-
-
-
 const sequelizeDB = new Sequelize('project_gd3', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'
