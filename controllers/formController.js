@@ -89,6 +89,7 @@ exports.createForm = async (req, res, next) => {
         await t.rollback();
     }
 }
+// admin + employee submit and update
 exports.updateForm = async (req, res, next) => {
     const FormId = req.params.id;
     const receiver = req.body.receiver;
@@ -120,6 +121,26 @@ exports.updateForm = async (req, res, next) => {
         }, { where: { FormId: FormId }, transaction: t });
         await t.commit();
         res.status(200).send('update form success');
+        console.log("abc");
+    } catch (error) {
+        await t.rollback();
+    }
+}
+exports.submitForm = async (req, res, next) => {
+    const FormId = req.params.id;
+    const status = req.body.status;
+    const content = req.body.FormDetail.content;
+    const t = await sequelizeDB.transaction();
+    try {
+        const form = await Form.update({
+            status: status,
+        }, { where: { id: FormId }, transaction: t });
+        await FormDetail.update({
+            formID: form.id,
+            content: content,
+        }, { where: { FormId: FormId }, transaction: t });
+        await t.commit();
+        res.status(200).send('submit form success');
         console.log("abc");
     } catch (error) {
         await t.rollback();

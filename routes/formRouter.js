@@ -7,7 +7,8 @@ const { verifyToken } = require('../middleware/auth');
 Router.use(verifyToken);
 
 Router.post('/create', decentralization([1, 2, 3]), formController.createForm, formController.sendEmail);
-Router.put('/update/:id', decentralization([1, 5]), formController.updateForm);
+Router.put('/update/:id', decentralization([1, 2, 3]), formController.updateForm);
+Router.put('/submit/:id',decentralization([5]), formController.submitForm);
 Router.get('/user', decentralization([1, 5]), formController.getUserForm);
 Router.get('/HR', decentralization([3]), formController.HRGetStatus);
 Router.patch('/HR/:id', decentralization([3]), formController.HRPutStatusForm);
@@ -83,6 +84,45 @@ module.exports = Router;
  *           application/json:
  *             schema:
  *                $ref: '#/components/formData/PutForm'
+ *       404:
+ *         description:
+ *            error if the field is blank, OR
+ *            error if wrong user name or password
+ *         content:
+ *            application/json:
+ *             schema:
+ *               type: object
+ *
+ */
+// submit form
+/**
+ * @swagger
+ * /api/v1/form/submit/{id}:
+ *   put:
+ *     tags:
+ *      - Form API
+ *     summary: submitted form
+ *     description:
+ *           retrieve token to access features
+ *     security:
+ *      - bearerAuth: []
+ *     parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *             type: string
+ *     requestBody:
+ *       content:
+ *        application/json:
+ *         schema:
+ *            $ref: '#/components/formData/submitForm'
+ *     responses:
+ *       200:
+ *         description: create a form with admin access
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/formData/submitForm'
  *       404:
  *         description:
  *            error if the field is blank, OR

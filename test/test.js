@@ -16,22 +16,22 @@ describe('Form', () => {
     describe('/POST form', () => {
         it('it should create form', (done) => {
             let form = {
-                "userId": "6bf2a520-2b68-11ec-a821-a12307901d2c",
-                "receiver": "bmw",
-                "type": 0,
-                "status": "new",
-                "dueDate": "2021-10-25",
-                "isDeleted": 0,
-                "createBY": "admin",
-                "updateBY": "admin",
-                "complete": 1,
-                "reject": 0,
-                "FormDetail": {
-                    "content": "form Thử Việc 10/12",
-                    "managerComment": "",
-                    "isDeleted": 0,
-                    "createBY": "admin",
-                    "updateBY": "admin"
+                "userId":"8035c3a0-314e-11ec-b7aa-effba71fc9d2",
+                "receiver":"Form Thu Viec",
+                "type":0,
+                "status":"new",
+                "dueDate":"2021-10-25",
+                "isDeleted":0,
+                "createBY":"admin",
+                "updateBY":"admin",
+                "complete":1,
+                "reject":0,
+                "FormDetail":{
+                    "content":"form Thử Việc 10/12",
+                    "managerComment":"",
+                    "isDeleted":0,
+                    "createBY":"admin",
+                    "updateBY":"admin"
                 }
             }
             chai.request(server)
