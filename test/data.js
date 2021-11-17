@@ -1,0 +1,9 @@
+let token = {
+    admin: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiJhZG1pbiIsImlhdCI6MTYzNDY5OTc0N30.nNme4aeiyUv8zkUHMCtxNo8hy9dgjXjabQkpQMQ5DdA', 
+    manager : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ndXllbmhhaW5hbSIsInBhc3N3b3JkIjoiaGFpbmFtcGgxMTM3MSIsImlhdCI6MTYzMzk0MjM1M30.BGUV2_r_u30oK_SxE-MUB4yhqjO-_pbAUcILY4mk7UE',
+    HR: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhSIiwicGFzc3dvcmQiOiJIUiIsImlhdCI6MTYzNDA0OTkzMH0.Ig-cQEXbUzZ0Nsk9h-Gm7og1RFnxogjqZvicTd9OrSk',
+    HR1: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhSIiwicGFzc3dvcmQiOiJIUiIsImlhdCI6MTYzNDI5OTA0OH0.QwAulRR6rN600WcCtNYdzQjftOO7tTMW6zpic6QvkhU',
+    employee:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVtcGxveWVlIiwicGFzc3dvcmQiOiJFbXBsb3llZSIsImlhdCI6MTYzNDMxNTY0MX0.Tz-zaFf4_xs3Ncg9L_saXftqIIFnKeALaonS42-H6As',
+    checkToken:''
+}
+module.exports = token;
